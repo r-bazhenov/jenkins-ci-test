@@ -7,7 +7,6 @@ pipeline {
     }
 
     stages {
-
         stage('Environment') {
             steps {
                 sh 'pwd'
@@ -15,22 +14,17 @@ pipeline {
                 sh 'java -version'
             }
         }
-
         stage('Build') {
             steps {
                 sh 'chmod +x gradlew'
                 sh './gradlew clean build'
             }
         }
-
         stage('Artifacts') {
             steps {
                 sh 'ls -la build/libs'
             }
         }
-    }
-
-    stages {
         stage('Print Environment') {
             steps {
                 echo "Project: ${PROJECT_NAME}"
