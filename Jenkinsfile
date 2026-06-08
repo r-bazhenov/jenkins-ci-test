@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        PROJECT_NAME = 'jenkins-learning'
+        BUILD_ENV = 'sandbox'
+    }
+
     stages {
 
         stage('Environment') {
@@ -21,6 +26,17 @@ pipeline {
         stage('Artifacts') {
             steps {
                 sh 'ls -la build/libs'
+            }
+        }
+    }
+
+    stages {
+        stage('Print Environment') {
+            steps {
+                echo "Project: ${PROJECT_NAME}"
+                echo "Environment: ${BUILD_ENV}"
+
+                sh 'env | sort'
             }
         }
     }
