@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['dev', 'test', 'prod'],
+            description: 'Target environment'
+        )
+    }
+
     environment {
         PROJECT_NAME = 'jenkins-learning'
         BUILD_ENV = 'sandbox'
@@ -31,6 +39,11 @@ pipeline {
                 echo "Environment: ${BUILD_ENV}"
 
                 sh 'env | sort'
+            }
+        }
+        stage('Show Parameters') {
+            steps {
+                echo "Branch: ${params.BRANCH_NAME}"
             }
         }
     }
