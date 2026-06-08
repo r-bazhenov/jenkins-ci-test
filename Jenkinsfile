@@ -3,15 +3,24 @@ pipeline {
 
     stages {
 
-        stage('Build') {
+        stage('Environment') {
             steps {
-                sh './gradlew build'
+                sh 'pwd'
+                sh 'ls -la'
+                sh 'java -version'
             }
         }
 
-        stage('Test') {
+        stage('Build') {
             steps {
-                sh './gradlew test'
+                sh 'chmod +x gradlew'
+                sh './gradlew clean build'
+            }
+        }
+
+        stage('Artifacts') {
+            steps {
+                sh 'ls -la build/libs'
             }
         }
     }
