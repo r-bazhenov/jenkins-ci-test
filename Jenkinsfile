@@ -37,13 +37,21 @@ pipeline {
             steps {
                 echo "Project: ${PROJECT_NAME}"
                 echo "Environment: ${BUILD_ENV}"
-
-                sh 'env | sort'
             }
         }
         stage('Show Parameters') {
             steps {
-                echo "Branch: ${params.BRANCH_NAME}"
+                echo "Environment: ${params.ENVIRONMENT}"
+            }
+        }
+        stage('Deploy') {
+            when {
+                expression {
+                    params.ENVIRONMENT == 'prod'
+                }
+            }
+            steps {
+                echo 'Deploying to production'
             }
         }
     }
