@@ -11,5 +11,6 @@ public class MainTest {
     public void testMain() {
         assertTrue(true);
         assertFalse(false);
+        assertFalse(false);
     }
 }
